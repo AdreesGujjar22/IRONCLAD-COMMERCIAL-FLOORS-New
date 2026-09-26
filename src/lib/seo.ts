@@ -1,0 +1,121 @@
+import { site } from "@/data/site";
+
+export const SITE_URL = "https://ironcladcommercialfloors.ca";
+
+export const businessId = `${SITE_URL}/#business`;
+
+export const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "GeneralContractor"],
+  "@id": businessId,
+  name: site.name,
+  url: SITE_URL,
+  telephone: "+1-604-540-3999",
+  email: site.email,
+  priceRange: "$$",
+  image: `${SITE_URL}/favicon.ico`,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "783 E 60th Ave",
+    addressLocality: "Vancouver",
+    addressRegion: "BC",
+    postalCode: "V5X 2A5",
+    addressCountry: "CA",
+  },
+  geo: { "@type": "GeoCoordinates", latitude: 49.2155, longitude: -123.0905 },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      opens: "00:00",
+      closes: "23:59",
+    },
+  ],
+  areaServed: [
+    "Vancouver", "Burnaby", "New Westminster", "Coquitlam", "Port Coquitlam",
+  ].map((n) => ({ "@type": "City", name: n })),
+};
+
+export const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${SITE_URL}/#website`,
+  name: site.name,
+  alternateName: site.shortName,
+  url: SITE_URL,
+  publisher: { "@id": businessId },
+};
+
+export type Crumb = { name: string; path: string };
+
+export function breadcrumbSchema(crumbs: Crumb[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [{ name: "Home", path: "/" }, ...crumbs].map((c, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: c.name,
+      item: `${SITE_URL}${c.path}`,
+    })),
+  };
+}
+
+export function faqSchema(faqs: { q: string; a: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+}
+
+export function serviceSchema(name: string, description: string, path: string, area = "Vancouver, BC") {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name,
+    description,
+    url: `${SITE_URL}${path}`,
+    serviceType: name,
+    provider: { "@id": businessId },
+    areaServed: { "@type": "Place", name: area },
+  };
+}
+
+/** Builds full head(): title, description, canonical, Open Graph, Twitter, JSON-LD. */
+export function seo(opts: {
+  path: string;
+  title: string;
+  description: string;
+  type?: "website" | "article";
+  crumbs?: Crumb[];
+  schemas?: object[];
+}) {
+  const url = `${SITE_URL}${opts.path === "/" ? "" : opts.path}` || SITE_URL;
+  const schemas = [...(opts.schemas ?? [])];
+  if (opts.crumbs?.length) schemas.push(breadcrumbSchema(opts.crumbs));
+  return {
+    meta: [
+      { title: opts.title },
+      { name: "description", content: opts.description },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
+      { property: "og:site_name", content: site.name },
+      { property: "og:locale", content: "en_CA" },
+      { property: "og:type", content: opts.type ?? "website" },
+      { property: "og:title", content: opts.title },
+      { property: "og:description", content: opts.description },
+      { property: "og:url", content: url },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: opts.title },
+      { name: "twitter:description", content: opts.description },
+      { name: "geo.region", content: "CA-BC" },
+      { name: "geo.placename", content: "Vancouver" },
+    ],
+    links: [{ rel: "canonical", href: url }],
+    scripts: schemas.map((s) => ({ type: "application/ld+json", children: JSON.stringify(s) })),
+  };
+}
