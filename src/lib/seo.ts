@@ -64,7 +64,12 @@ function titleKeyword(title: string) {
 
 function pageTitle(title: string, path: string) {
   if (path === "/") return HOME_TITLE;
-  return `${title.replace(/\s*\|.*$/, "").trim()}${BRAND_SUFFIX}`;
+  const base = title.replace(/\s*\|.*$/, "").trim();
+  const normalized = base.replace(/\bin Vancouver(?:,\s*BC)?\b/i, "In Vancouver");
+  const withLocation = /\bIn Vancouver\b/.test(normalized)
+    ? normalized
+    : `${normalized} In Vancouver`;
+  return `${withLocation}${BRAND_SUFFIX}`;
 }
 
 function pageDescription(description: string, title: string, path: string) {
