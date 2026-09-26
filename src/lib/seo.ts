@@ -46,6 +46,40 @@ export const websiteSchema = {
   publisher: { "@id": businessId },
 };
 
+const BRAND_SUFFIX = " | Ironclad Commercial Floors";
+const HOME_TITLE = `Commercial Flooring In Vancouver${BRAND_SUFFIX}`;
+const HOME_KEYWORD = "Commercial Flooring In Vancouver";
+
+function titleKeyword(title: string) {
+  const stopWords = new Set(["about", "across", "how", "in", "our", "the", "vs", "why"]);
+  return title
+    .replace(/\s*\|.*$/, "")
+    .replace(/[,:]/g, "")
+    .trim()
+    .split(/\s+/)
+    .filter((word) => !stopWords.has(word.toLowerCase()))
+    .slice(0, 4)
+    .join(" ");
+}
+
+function pageTitle(title: string, path: string) {
+  if (path === "/") return HOME_TITLE;
+  return `${title.replace(/\s*\|.*$/, "").trim()}${BRAND_SUFFIX}`;
+}
+
+function pageDescription(description: string, title: string, path: string) {
+  const keyword = path === "/" ? HOME_KEYWORD : titleKeyword(title);
+  let result = description.trim();
+  if (!result.slice(0, 156).toLowerCase().includes(keyword.toLowerCase())) {
+    result = `${keyword}: ${result}`;
+  }
+  if (result.length < 155) {
+    result += " Serving Vancouver and the Lower Mainland. Contact Ironclad for a free estimate.";
+  }
+  if (result.length > 159) result = `${result.slice(0, 156).trimEnd()}...`;
+  return result;
+}
+
 export type Crumb = { name: string; path: string };
 
 export function breadcrumbSchema(crumbs: Crumb[]) {
@@ -96,22 +130,24 @@ export function seo(opts: {
   schemas?: object[];
 }) {
   const url = `${SITE_URL}${opts.path === "/" ? "" : opts.path}` || SITE_URL;
+  const title = pageTitle(opts.title, opts.path);
+  const description = pageDescription(opts.description, opts.title, opts.path);
   const schemas = [...(opts.schemas ?? [])];
   if (opts.crumbs?.length) schemas.push(breadcrumbSchema(opts.crumbs));
   return {
     meta: [
-      { title: opts.title },
-      { name: "description", content: opts.description },
+      { title },
+      { name: "description", content: description },
       { name: "robots", content: "index, follow, max-image-preview:large" },
       { property: "og:site_name", content: site.name },
       { property: "og:locale", content: "en_CA" },
       { property: "og:type", content: opts.type ?? "website" },
-      { property: "og:title", content: opts.title },
-      { property: "og:description", content: opts.description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
       { property: "og:url", content: url },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: opts.title },
-      { name: "twitter:description", content: opts.description },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
       { name: "geo.region", content: "CA-BC" },
       { name: "geo.placename", content: "Vancouver" },
     ],

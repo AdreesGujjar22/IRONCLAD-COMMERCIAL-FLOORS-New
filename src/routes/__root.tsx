@@ -79,11 +79,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Ironclad Commercial Floors | Vancouver BC Flooring Contractor" },
+      { title: "Commercial Flooring In Vancouver | Ironclad Commercial Floors" },
       {
         name: "description",
         content:
-          "Commercial flooring contractor in Vancouver, BC. Installation, repair, replacement, epoxy, and maintenance for businesses across the Lower Mainland.",
+          "Commercial Flooring In Vancouver: Ironclad installs epoxy, concrete, vinyl, and carpet floors for local businesses, with estimates and flexible scheduling.",
       },
       { name: "author", content: "Ironclad Commercial Floors" },
       { property: "og:type", content: "website" },
@@ -134,4 +134,3 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
-

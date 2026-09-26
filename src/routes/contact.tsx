@@ -61,6 +61,17 @@ function ContactPage() {
           </form>
         </div>
       </Section>
+      <Section tone="surface">
+        <h2 className="text-2xl md:text-3xl">Find Ironclad Commercial Floors</h2>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2606.1947230914134!2d-123.088378!3d49.2158341!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5486751bef21a57d%3A0x41cd6e337360bab!2sIRONCLAD%20COMMERCIAL%20FLOORS!5e0!3m2!1sen!2sca!4v1790464561227!5m2!1sen!2sca"
+          title="IRONCLAD COMMERCIAL FLOORS on Google Maps"
+          className="mt-6 h-[320px] w-full border-0 md:h-[450px]"
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="strict-origin-when-cross-origin"
+        />
+      </Section>
     </>
   );
 }

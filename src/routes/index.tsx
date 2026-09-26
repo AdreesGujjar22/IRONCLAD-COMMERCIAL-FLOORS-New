@@ -15,8 +15,8 @@ export const Route = createFileRoute("/")({
   head: () =>
     seo({
       path: "/",
-      title: "Commercial Flooring Contractor in Vancouver, BC",
-      description: "Ironclad Commercial Floors installs, repairs, and replaces commercial flooring across Vancouver, BC: epoxy, polished concrete, vinyl, and carpet tile systems.",
+      title: "Commercial Flooring In Vancouver | Ironclad Commercial Floors",
+      description: "Commercial Flooring In Vancouver: Ironclad installs epoxy, concrete, vinyl, and carpet floors for local businesses, with estimates and flexible scheduling.",
       schemas: [localBusinessSchema, websiteSchema],
     }),
   component: Home,
@@ -68,7 +68,7 @@ function Home() {
     services.find((s) => s.slug === "epoxy-floor-coating")!,
     services.find((s) => s.slug === "commercial-flooring")!,
     services.find((s) => s.slug === "commercial-luxury-vinyl-flooring-installation")!,
-    services.find((s) => s.slug === "warehouse-flooring-installation")!,
+    services.find((s) => s.slug === "warehouse-epoxy-flooring")!,
     services.find((s) => s.slug === "commercial-concrete-floor-repair")!,
     services.find((s) => s.slug === "restaurant-flooring-installation")!,
   ];

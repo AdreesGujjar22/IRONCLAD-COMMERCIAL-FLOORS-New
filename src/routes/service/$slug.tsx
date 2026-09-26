@@ -17,7 +17,7 @@ export const Route = createFileRoute("/service/$slug")({
     const path = `/service/${s.slug}`;
     return seo({
       path,
-      title: `${s.name} | Ironclad Vancouver, BC`.slice(0, 60),
+      title: s.name,
       description: `${s.short} Serving commercial properties across Vancouver, BC with Red Seal installers and a bonded warranty.`,
       crumbs: [{ name: "Services", path: "/services" }, { name: s.name, path }],
       schemas: [serviceSchema(s.name, s.short, path)],
