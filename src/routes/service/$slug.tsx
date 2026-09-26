@@ -2,7 +2,7 @@ import { seo, serviceSchema } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { serviceBySlug, services } from "@/data/services";
-import { PageHero, Section, SectionHead, BulletList, CTABand, LinkCard } from "@/components/site/Blocks";
+import { PageHero, Section, SectionHead, CTABand, LinkCard } from "@/components/site/Blocks";
 import hero from "@/assets/hero-install.jpg";
 
 export const Route = createFileRoute("/service/$slug")({
@@ -34,14 +34,8 @@ function ServicePage() {
       <PageHero eyebrow={s.category} title={`${s.name} in Vancouver, BC`} intro={s.short} image={hero} />
       <Breadcrumbs items={[{ name: "Services", to: "/services" }, { name: s.name }]} />
       <Section>
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr]">
-          <div className="space-y-4 text-muted-foreground">
-            {s.body.map((p) => <p key={p.slice(0, 30)}>{p}</p>)}
-          </div>
-          <aside className="h-fit border border-border bg-surface p-7">
-            <h2 className="eyebrow">What you get</h2>
-            <div className="mt-4"><BulletList items={s.bullets} /></div>
-          </aside>
+        <div className="max-w-3xl space-y-4 text-muted-foreground">
+          {s.body.map((p) => <p key={p.slice(0, 30)}>{p}</p>)}
         </div>
       </Section>
       {related.length > 0 && (
