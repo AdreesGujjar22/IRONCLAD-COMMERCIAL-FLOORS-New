@@ -66,7 +66,7 @@ const reviews = [
 function Home() {
   const featured = [
     services.find((s) => s.slug === "epoxy-floor-coating")!,
-    services.find((s) => s.slug === "concrete-floor-polishing")!,
+    services.find((s) => s.slug === "commercial-flooring")!,
     services.find((s) => s.slug === "commercial-luxury-vinyl-flooring-installation")!,
     services.find((s) => s.slug === "warehouse-flooring-installation")!,
     services.find((s) => s.slug === "commercial-concrete-floor-repair")!,

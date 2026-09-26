@@ -85,7 +85,13 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://ironcladcommercialfloors.ca/service/concrete-floor-polishing</loc>
+    <loc>https://ironcladcommercialfloors.ca/service/commercial-flooring</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ironcladcommercialfloors.ca/service/commercial-epoxy-flooring</loc>
     <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

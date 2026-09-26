@@ -19,19 +19,35 @@ export const categories = [
 
 export const services: Service[] = [
   {
-    slug: "concrete-floor-polishing",
-    name: "Concrete Floor Polishing",
+    slug: "commercial-flooring",
+    name: "Commercial Flooring",
     category: "Concrete & Epoxy",
     short:
-      "Mechanically ground and densified slabs that shine without a coating to peel.",
+      "Commercial flooring systems selected for your space, traffic, and operating schedule.",
     body: [
-      "Polishing works the slab you already own. We cut with progressively finer diamonds, harden the surface with a lithium densifier, then burnish to the sheen you picked, so the finish is the concrete itself rather than a film sitting on top of it.",
-      "Before quoting we scratch-test the slab and check for old adhesive, patches, and aggregate depth. That tells us honestly whether you will get a clean salt-and-pepper look, a full aggregate exposure, or whether polishing is the wrong call for this floor.",
+      "From concrete and epoxy to resilient flooring, carpet, and tile, we help you choose a system that suits the way your facility operates. We assess the space, existing slab, traffic, and maintenance needs before recommending materials.",
+      "Our team coordinates preparation, installation, and phased scheduling around your business so the finished floor performs without unnecessary disruption.",
     ],
     bullets: [
-      "Scratch test and exposure preview before commitment",
-      "Dust-extracted grinding for occupied buildings",
-      "Maintenance that is water and a scrubber, nothing more",
+      "Flooring recommendations matched to your facility",
+      "Subfloor assessment and preparation",
+      "Installation planned around business operations",
+    ],
+  },
+  {
+    slug: "commercial-epoxy-flooring",
+    name: "Commercial Epoxy Flooring",
+    category: "Concrete & Epoxy",
+    short:
+      "Durable, seamless epoxy flooring for commercial spaces with demanding traffic and cleaning needs.",
+    body: [
+      "Commercial epoxy flooring creates a seamless, easy-to-clean surface for warehouses, kitchens, production areas, and other busy facilities. We assess traffic, chemical exposure, moisture, and downtime before recommending the right system.",
+      "We prepare the concrete mechanically, address cracks and surface defects, and install the specified primer, epoxy build, and protective topcoat for a durable finish suited to your operation.",
+    ],
+    bullets: [
+      "System selected for traffic and exposure conditions",
+      "Mechanically prepared concrete substrate",
+      "Coordinated installation and cure schedule",
     ],
   },
   {
